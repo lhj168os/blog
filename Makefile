@@ -1,9 +1,9 @@
 #export GOPATH=/home/server/goprojects3
 
-all: blog-new
+all: blog
 
 blog:
-	@echo 'building blog-new ...'
-	@go build blog-new
-	@echo 'build blog-new done'
+	@echo 'building blog ...'
+	@go build blog
+	@echo 'build blog done'
 .PHONY: blog-new
