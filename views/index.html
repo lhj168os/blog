@@ -1,0 +1,164 @@
+<div class="banner">
+    <div class="cont w1000">
+        <div class="title">
+            <h3>{{.MyNickname}}<br/>BLOG</h3>
+            <h4>well-balanced heart</h4>
+        </div>
+        <div class="amount">
+            <p><span class="text">访问量</span><span class="access">{{.ViewsNum}}</span></p>
+            <p><span class="text">日志</span><span class="daily-record">{{.ArticleNum}}</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="content">
+    <div class="cont w1000">
+        <div class="title">
+            <span class="layui-breadcrumb" lay-separator="|">
+                {{range .Lable}}
+                <a href="javascript:;" onclick="activeLabel({{.Types}});" id="{{.Types}}">{{.TagName}}</a>
+                {{end}}
+            </span>ß
+        </div>
+        <div class="list-item" id="article">
+            {{if .Articles}}
+            {{$val := index .Articles.Type2Articles 1}}
+            {{range $val.ID2Article}}
+            <div class="item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
+                            <div class="img"><img src="../static/img/{{.Img}}" alt=""></div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
+                            <a href="details/{{.ID}}">
+                                <div class="item-cont">
+                                    <h3>{{.Title}}
+                                        {{if .IsNew}}
+                                        <button class="layui-btn layui-btn-danger new-icon">new</button>
+                                        {{end}}
+                                    </h3>
+                                    <h5></h5>
+                                    <p>
+                                        {{.Brief}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+            {{end}}
+        </div>
+
+        <div id="demo" style="text-align: center;"></div>
+    </div>
+</div> -->
+
+
+<div class="content">
+    <div class="cont w1000">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                {{range .Lable}}
+                    {{if eq .Types 1}}
+                        <li class="layui-this">{{.TagName}}</li>
+                    {{else}}
+                        <li>{{.TagName}}</li>
+                    {{end}}
+                {{end}}
+            </ul>
+            <div class="layui-tab-content">
+                {{$art := .Articles}}
+                {{range .Lable}}
+                    {{$ty := .Types}}
+                    {{if eq $ty 1}}
+                        <div class="layui-tab-item layui-show">
+                            {{if $art}}
+                                {{$val := index $art.Type2Articles $ty}}
+                                {{if $val}}
+                                    <ul class="layui-timeline">
+                                        {{range $val.ID2Article}}
+                                            <li class="layui-timeline-item">
+                                                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                                <div class="layui-timeline-content layui-text">
+                                                    <h3 class="layui-timeline-title" style="color:darkorange">{{.Tim.Y}}
+                                                        年{{.Tim.M}}月{{.Tim.D}}
+                                                        日</h3>
+                                                    <p>
+                                                        <br/>
+                                                    <h3>{{.Title}}</h3><br/>
+                                                    <p>{{.Brief}}</p><br/>
+                                                    <a href="details/{{.ID}}" style="color:darkgoldenrod">阅读全文</a><br/>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        {{end}}
+                                        <li class="layui-timeline-item">
+                                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                            <div class="layui-timeline-content layui-text">
+                                                <h3 class="layui-timeline-title" style="color:darkorange">未来</h3>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                {{end}}
+                            {{end}}
+                        </div>
+                    {{else}}
+                        <div class="layui-tab-item">
+                            {{if $art}}
+                                {{$val := index $art.Type2Articles $ty}}
+                                {{if $val}}
+                                    <ul class="layui-timeline">
+                                        {{range $val.ID2Article}}
+                                            <li class="layui-timeline-item">
+                                                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                                <div class="layui-timeline-content layui-text">
+                                                    <h3 class="layui-timeline-title" style="color:darkorange">{{.Tim.Y}}
+                                                        年{{.Tim.M}}月{{.Tim.D}}
+                                                        日</h3>
+                                                    <p>
+                                                        <br/>
+                                                    <h3>{{.Title}}</h3><br/>
+                                                    <p>{{.Brief}}</p><br/>
+                                                    <a href="details/{{.ID}}" style="color:darkgoldenrod">阅读全文</a><br/>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        {{end}}
+                                        <li class="layui-timeline-item">
+                                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                            <div class="layui-timeline-content layui-text">
+                                                <h3 class="layui-timeline-title" style="color:darkorange">未来</h3>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                {{end}}
+                            {{end}}
+                        </div>
+                    {{end}}
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../static/layui/layui.js"></script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+
+<!-- <script>
+    function activeLabel(p) {
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(i).removeAttribute("class");
+        }
+        document.getElementById(p).setAttribute("class", "active");
+    }
+</script> -->

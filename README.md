@@ -1,2 +1,2 @@
-# blog-modify
-blog code after modify
+# blog
+my diy blog
